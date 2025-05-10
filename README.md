@@ -16,7 +16,8 @@ Run tests
 npm test
 ```
 
-Run dockerized application
+Run dockerized application 
+Note : Need environment file to create docker container. We can copy sample.env files to .env to have a default environment file.
 
 ```
 docker-compose up
@@ -26,6 +27,13 @@ Rebuild & Run dockerized application
 
 ```
 docker-compose up --build
+```
+
+### APIs
+If .env is kept same, then server should run at 3000 port. User below rest API to get events for particular integrator
+
+```
+http://127.0.0.1:3000/events/0xaA86522Fd61537c0fBD125f5a4e16cba3e24729f
 ```
 
 ### About
