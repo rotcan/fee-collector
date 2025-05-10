@@ -1,31 +1,42 @@
-Initialize application
+### Initialize application
 
 ```
 npm i
 ```
 
-Run application 
+### Run application 
 
 ```
 npm run start
 ```
 
-Run tests
+### Run tests
 
 ```
 npm test
 ```
 
-Run dockerized application
+### Run dockerized application  
+_Note : Need environment file to create docker container. We can copy sample.env files to .env to have a default environment file._
+```
+mv sample.env .env
+```
 
 ```
 docker-compose up
 ```
 
-Rebuild & Run dockerized application 
+### Rebuild & Run dockerized application (for cases where env file/code is changed )
 
 ```
 docker-compose up --build
+```
+
+### APIs
+If .env is kept same, then server should run at 3000 port. User below rest API to get events for particular integrator
+
+```
+http://127.0.0.1:3000/events/0xaA86522Fd61537c0fBD125f5a4e16cba3e24729f
 ```
 
 ### About
@@ -68,6 +79,11 @@ This tool is used to index fee collected events generated from evm based contrac
     - [x] Added interfaces for db & fee collector to decouple concrete implementations
     - [x] Added exponential backoff to cron jobs for rpc failues (rate limit etc)
     - [x] Added few integration tests
+    - [x] Added option to pause/resume indexing
+    - [x] Added option to upsert records if same blocks need to be processed again
+    - [x] Control logging levels from env variables
+    - [x] Added index for faster retrieval for integrator and unique index so same transactionHash is not processed twice
+    - [x] Support multiple chains using same code by passing separate environment variables. Service can be containerized and run parallelly using different rpc urls as we create one events table per chain 
 
 + Improvements
     - [ ] Implement PM2 so service restarts on failures
