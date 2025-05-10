@@ -71,6 +71,8 @@ This tool is used to index fee collected events generated from evm based contrac
     - [x] Added option to pause/resume indexing
     - [x] Added option to upsert records if same blocks need to be processed again
     - [x] Control logging levels from env variables
+    - [x] Added index for faster retrieval for integrator and unique index so same transactionHash is not processed twice
+    - [x] Support multiple chains using same code by passing separate environment variables. Service can be containerized and run parallelly using different rpc urls as we create one events table per chain 
 
 + Improvements
     - [ ] Implement PM2 so service restarts on failures
