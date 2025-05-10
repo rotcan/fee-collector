@@ -68,6 +68,9 @@ This tool is used to index fee collected events generated from evm based contrac
     - [x] Added interfaces for db & fee collector to decouple concrete implementations
     - [x] Added exponential backoff to cron jobs for rpc failues (rate limit etc)
     - [x] Added few integration tests
+    - [x] Added option to pause/resume indexing
+    - [x] Added option to upsert records if same blocks need to be processed again
+    - [x] Control logging levels from env variables
 
 + Improvements
     - [ ] Implement PM2 so service restarts on failures
