@@ -1,29 +1,32 @@
-Initialize application
+### Initialize application
 
 ```
 npm i
 ```
 
-Run application 
+### Run application 
 
 ```
 npm run start
 ```
 
-Run tests
+### Run tests
 
 ```
 npm test
 ```
 
-Run dockerized application 
-Note : Need environment file to create docker container. We can copy sample.env files to .env to have a default environment file.
+### Run dockerized application  
+_Note : Need environment file to create docker container. We can copy sample.env files to .env to have a default environment file._
+```
+mv sample.env .env
+```
 
 ```
 docker-compose up
 ```
 
-Rebuild & Run dockerized application 
+### Rebuild & Run dockerized application (for cases where env file/code is changed )
 
 ```
 docker-compose up --build
