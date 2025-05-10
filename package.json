@@ -28,8 +28,6 @@
     "lifi-contract-typings": "github:lifinance/lifi-contract-types",
     "mongodb": "^6.16.0",
     "mongoose": "^8.14.1",
-    "mongoose-long": "^0.8.0",
-    "node-cron": "^3.0.3",
     "pino": "^9.6.0",
     "typescript": "^5.8.3"
   }
