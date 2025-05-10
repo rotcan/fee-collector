@@ -1,67 +1,78 @@
 Initialize application
 
-npm i 
+```
+npm i
+```
 
 Run application 
 
+```
 npm run start
+```
 
 Run tests
 
+```
 npm test
+```
 
 Run dockerized application
 
+```
 docker-compose up
+```
 
 Rebuild & Run dockerized application 
 
+```
 docker-compose up --build
+```
 
-FeeCollector Indexer
+### About
+
 This tool is used to index fee collected events generated from evm based contracts. It is designed in such a way that we can plug different chains and database to store events by writing concrete classes respectively. It stores events in separate table per chain assuming that a single chain can have lot of events and we do not require consolidated reporting of diffreent 
 
-Modules: 
+### Modules:
 
-Models:
-    events.ts : Model class to store parsed fee events generated from contract
-    eventindexer.ts : Model class to store last processed block by evm chain. Records from this model is used to resume indexing
++ Models:
+    * events.ts : Model class to store parsed fee events generated from contract
+    * eventindexer.ts : Model class to store last processed block by evm chain. Records from this model is used to resume indexing
 
-Db:
-    index.ts : Has IDBInterface interface which abstracts database operations
-    mongo.ts : Concrete implementation of IDBInterface implementing MongoDB operations
++ Db:
+    * index.ts : Has IDBInterface interface which abstracts database operations
+    * mongo.ts : Concrete implementation of IDBInterface implementing MongoDB operations
 
-Web3:
-    index.ts : Has IFeeCollector inferface which abstracts Fee collector methods
-    evm.ts : Concrete implementation of IFeeCollector interface, has Polygon related methods. Though it should work for other EVM chains if event structure is same 
++ Web3:
+    * index.ts : Has IFeeCollector inferface which abstracts Fee collector methods
+    * evm.ts : Concrete implementation of IFeeCollector interface, has Polygon related methods. Though it should work for other EVM chains if event structure is same 
 
-config.ts : This stores global configuration for the tool. Also instantiates logger object
++ config.ts : This stores global configuration for the tool. Also instantiates logger object
 
-dto.ts : This code contains request and response type for REST apis
++ dto.ts : This code contains request and response type for REST apis
 
-factory.ts : This has factory methods with conrete implementations of IDBInterface & IFeeCollector interface based on environment variables
++ factory.ts : This has factory methods with conrete implementations of IDBInterface & IFeeCollector interface based on environment variables
 
-helper.ts : This code contains helper function to convert environment string field to boolean
++ helper.ts : This code contains helper function to convert environment string field to boolean
 
-main.ts : This is the starting point of the application. It calls method to initalize and run fastify server
++ main.ts : This is the starting point of the application. It calls method to initalize and run fastify server
 
-server.ts : This contains code for fastify server initialization, cron and routes setup. This exposes REST API which returns event details for specific integrator
++ server.ts : This contains code for fastify server initialization, cron and routes setup. This exposes REST API which returns event details for specific integrator
 
-service.ts : This code glues together different parts of the tool. It calls web3 methods to fetch and parse events and then calls db methods to update records in database.
++ service.ts : This code glues together different parts of the tool. It calls web3 methods to fetch and parse events and then calls db methods to update records in database.
 
-Functionalities:
-Implemented:
-    Integrator API : Added pagination so that server does not respond a large number of records in one go. Always good to have pagination in get calls which return array of records.
-    Dockerfile : Dockerised service and mongodb in containers
-    Added health check API which can be used containerized solutions (e.g. kubernetes) to restart service if service stops responding.
-    Added interfaces for db & fee collector to decouple concrete implementations
-    Added exponential backoff to cron jobs for rpc failues (rate limit etc)
-    Added few integration tests
+### Functionalities:
++ Implemented
+    - [x] Integrator API : Added pagination so that server does not respond a large number of records in one go. Always good to have pagination in get calls which return array of records.
+    - [x] Dockerfile : Dockerised service and mongodb in containers
+    - [x] Added health check API which can be used containerized solutions (e.g. kubernetes) to restart service if service stops responding.
+    - [x] Added interfaces for db & fee collector to decouple concrete implementations
+    - [x] Added exponential backoff to cron jobs for rpc failues (rate limit etc)
+    - [x] Added few integration tests
 
-Improvements
-    Implement PM2 so service restarts on failures
-    Better error handling
-    Refactor modules to improve readability and have proper division of code.
-    Better congifuration handling
-    Add more comprehensive test cases
++ Improvements
+    - [ ] Implement PM2 so service restarts on failures
+    - [ ] Better error handling
+    - [ ] Refactor modules to improve readability and have proper division of code.
+    - [ ] Better congifuration handling
+    - [ ] Add more comprehensive test cases
 
